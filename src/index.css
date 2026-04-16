@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+  --color-liora-gold: #D4AF37;
+  --color-liora-black: #050505;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #ffffff;
+}
+
+body {
+  color: var(--color-liora-black);
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar para manter o luxo */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+}
