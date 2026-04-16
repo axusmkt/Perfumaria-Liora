@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { 
   ShoppingBag, 
@@ -22,121 +22,121 @@ import {
 const PRODUCTS = [
   // Masculino
   {
-    id: 1,
-    name: "Bad Boy",
-    inspiration: "Carolina Herrera",
-    price: "149,90",
-    image: "https://i.ibb.co/0RzRQsHJ/Bad-Boy-Carolina-Herrera-masculino.webp",
-    description: "A força e o mistério de uma presença inesquecível.",
-    category: "Masculino"
-  },
-  {
-    id: 2,
-    name: "Black XS",
-    inspiration: "Paco Rabanne",
-    price: "149,90",
-    image: "https://i.ibb.co/wh02sGYY/Black-XS-Paco-Rabanne-masculino.webp",
-    description: "Para o homem que vive intensamente cada momento.",
-    category: "Masculino"
-  },
-  {
-    id: 3,
-    name: "Invictus Victory",
-    inspiration: "Paco Rabanne",
-    price: "149,90",
-    image: "https://i.ibb.co/BKjf4DhC/Invictus-Vitory-Paco-Rabanne-masculino.webp",
-    description: "A fragrância da vitória e do poder absoluto.",
+    id: 7,
+    name: "The Most Wanted",
+    inspiration: "Azzaro",
+    price: "99,90",
+    image: "https://i.ibb.co/Mk4X8HNT/The-Most-Wanted-Azzaro-masculino.webp",
+    description: "Ousadia e sedução em cada nota.",
     category: "Masculino"
   },
   {
     id: 4,
     name: "L'eau D'issey",
     inspiration: "Issey Miyake",
-    price: "149,90",
+    price: "87,60",
     image: "https://i.ibb.co/tPNLvFbb/L-eua-D-issey-Pour-Homme-De-Issey-Miyake-masculino.webp",
     description: "A pureza da água e a força da natureza.",
-    category: "Masculino"
-  },
-  {
-    id: 5,
-    name: "Toy Boy",
-    inspiration: "Moschino",
-    price: "149,90",
-    image: "https://i.ibb.co/Mxnc3qdj/Moschino-Toy-Boy-masculino.webp",
-    description: "Elegância com um toque de ironia e diversão.",
     category: "Masculino"
   },
   {
     id: 6,
     name: "Phantom",
     inspiration: "Paco Rabanne",
-    price: "149,90",
+    price: "98,50",
     image: "https://i.ibb.co/GQH42m2R/Phantom-Paco-Rabanne-masculino.webp",
     description: "A essência da inovação e do magnetismo moderno.",
     category: "Masculino"
   },
   {
-    id: 7,
-    name: "The Most Wanted",
-    inspiration: "Azzaro",
-    price: "149,90",
-    image: "https://i.ibb.co/Mk4X8HNT/The-Most-Wanted-Azzaro-masculino.webp",
-    description: "Ousadia e sedução em cada nota.",
+    id: 2,
+    name: "Black XS",
+    inspiration: "Paco Rabanne",
+    price: "89,90",
+    image: "https://i.ibb.co/wh02sGYY/Black-XS-Paco-Rabanne-masculino.webp",
+    description: "Para o homem que vive intensamente cada momento.",
+    category: "Masculino"
+  },
+  {
+    id: 5,
+    name: "Toy Boy",
+    inspiration: "Moschino",
+    price: "96,80",
+    image: "https://i.ibb.co/Mxnc3qdj/Moschino-Toy-Boy-masculino.webp",
+    description: "Elegância com um toque de ironia e diversão.",
+    category: "Masculino"
+  },
+  {
+    id: 3,
+    name: "Invictus Victory",
+    inspiration: "Paco Rabanne",
+    price: "92,40",
+    image: "https://i.ibb.co/BKjf4DhC/Invictus-Vitory-Paco-Rabanne-masculino.webp",
+    description: "A fragrância da vitória e do poder absoluto.",
+    category: "Masculino"
+  },
+  {
+    id: 1,
+    name: "Bad Boy",
+    inspiration: "Carolina Herrera",
+    price: "94,90",
+    image: "https://i.ibb.co/0RzRQsHJ/Bad-Boy-Carolina-Herrera-masculino.webp",
+    description: "A força e o mistério de uma presença inesquecível.",
     category: "Masculino"
   },
   // Feminino
   {
+    id: 13,
+    name: "Delina",
+    inspiration: "Parfums de Marly",
+    price: "99,90",
+    image: "https://i.ibb.co/Vk0YhJ8/Marly-Delina-feminino.webp",
+    description: "A sofisticação de um jardim real.",
+    category: "Feminino"
+  },
+  {
     id: 8,
     name: "Sì Passione",
     inspiration: "Armani Beauty",
-    price: "149,90",
+    price: "87,60",
     image: "https://i.ibb.co/7dMXyX7S/Armani-Beauty-Si-passione-feminino.webp",
     description: "Um manifesto de liberdade e audácia feminina.",
-    category: "Feminino"
-  },
-  {
-    id: 9,
-    name: "Miss Dior",
-    inspiration: "Dior",
-    price: "149,90",
-    image: "https://i.ibb.co/prn96GCD/Dior-Miss-Edp-feminino.webp",
-    description: "A elegância atemporal de um buquê floral.",
-    category: "Feminino"
-  },
-  {
-    id: 10,
-    name: "Good Girl",
-    inspiration: "Carolina Herrera",
-    price: "149,90",
-    image: "https://i.ibb.co/6RYn9j1c/Good-Girl-Carolina-Herrera-feminino.webp",
-    description: "Para a mulher que conquista o mundo a cada passo.",
-    category: "Feminino"
-  },
-  {
-    id: 11,
-    name: "Classique",
-    inspiration: "Jean Paul Gaultier",
-    price: "149,90",
-    image: "https://i.ibb.co/Xx3PzSYY/Jean-Paul-Classique-feminino.webp",
-    description: "A sedução em sua forma mais pura.",
     category: "Feminino"
   },
   {
     id: 12,
     name: "Libre",
     inspiration: "Yves Saint Laurent",
-    price: "149,90",
+    price: "96,80",
     image: "https://i.ibb.co/bjcny0pv/Libre-Edp-Yves-Saint-Laurent-feminino.webp",
     description: "A liberdade de viver tudo intensamente.",
     category: "Feminino"
   },
   {
-    id: 13,
-    name: "Delina",
-    inspiration: "Parfums de Marly",
-    price: "149,90",
-    image: "https://i.ibb.co/Vk0YhJ8/Marly-Delina-feminino.webp",
-    description: "A sofisticação de um jardim real.",
+    id: 9,
+    name: "Miss Dior",
+    inspiration: "Dior",
+    price: "89,90",
+    image: "https://i.ibb.co/prn96GCD/Dior-Miss-Edp-feminino.webp",
+    description: "A elegância atemporal de um buquê floral.",
+    category: "Feminino"
+  },
+  {
+    id: 11,
+    name: "Classique",
+    inspiration: "Jean Paul Gaultier",
+    price: "94,90",
+    image: "https://i.ibb.co/Xx3PzSYY/Jean-Paul-Classique-feminino.webp",
+    description: "A sedução em sua forma mais pura.",
+    category: "Feminino"
+  },
+  {
+    id: 10,
+    name: "Good Girl",
+    inspiration: "Carolina Herrera",
+    price: "92,40",
+    image: "https://i.ibb.co/6RYn9j1c/Good-Girl-Carolina-Herrera-feminino.webp",
+    description: "Para a mulher que conquista o mundo a cada passo.",
     category: "Feminino"
   }
 ];
@@ -169,21 +169,19 @@ export default function App() {
   };
 
   // Swipe Handlers Simples
-  const [startX, setStartX] = useState(0);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   const onTouchStart = (e: React.TouchEvent) => {
-    setStartX(e.touches[0].clientX);
+    touchStartX.current = e.touches[0].clientX;
   };
 
   const onTouchEnd = (e: React.TouchEvent) => {
-    const endX = e.changedTouches[0].clientX;
-    const deltaX = endX - startX;
+    touchEndX.current = e.changedTouches[0].clientX;
+    const deltaX = touchEndX.current - touchStartX.current;
 
-    if (deltaX < -50) {
-      handleNext();
-    } else if (deltaX > 50) {
-      handlePrev();
-    }
+    if (deltaX < -50) handleNext();
+    if (deltaX > 50) handlePrev();
   };
 
   return (
@@ -200,7 +198,7 @@ export default function App() {
             <img 
               src="https://i.ibb.co/sJW4gRG2/Logo-Liora.png" 
               alt="Liora Logo" 
-              className="h-8 md:h-10 object-contain"
+              className="h-12 md:h-16 object-contain"
             />
           </div>
 
@@ -257,15 +255,6 @@ export default function App() {
           >
             Descubra a Coleção
           </a>
-        </motion.div>
-
-        {/* Floating Product Background Decor */}
-        <motion.div 
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-20 opacity-10 pointer-events-none"
-        >
-          <img src={filteredProducts[0]?.image} alt="" className="w-96 grayscale" />
         </motion.div>
       </section>
 
@@ -500,7 +489,7 @@ export default function App() {
           <img 
             src="https://i.ibb.co/sJW4gRG2/Logo-Liora.png" 
             alt="Liora Logo" 
-            className="h-10 mb-12 opacity-50"
+            className="h-16 md:h-20 mb-12 opacity-50"
           />
           
           <div className="flex gap-8 mb-12">
